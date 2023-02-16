@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.UserMapper">
+    <resultMap id="userMap" type="User">
+        <id property="userId" column="user_id"/>
+        <result property="carType" column="card_type"/>
+        <result property="cardNo" column="card_no"/>
+        <result property="userName" column="user_name"/>
+        <result property="userSex" column="user_name"/>
+        <result property="userAge" column="user_sex"/>
+        <result property="userRole" column="user_role"/>
+    </resultMap>
+
+    <sql id="allColumns">
+        user_id,card_type,card_no,user_name,user_sex,user_age,user_role
+    </sql>
+
+    <select id="selectUserPage" resultMap="userMap">
+        select <include refid="allColumns"></include>
+            from user
+            <where>
+                <if test="userName!=null and userName !=''">
+                    and user_name like concat('%',#{userName},'%')
+                </if>
+                <if test="userSex!=null and userSex !=''">
+                    and user_sex = #{userSex}
+                </if>
+            </where>
+            limit #{startRow},5
+    </select>
+
+    <insert id="insert" parameterType="user">
+        insert into user values (#{userId},#{carType},#{cardNo},#{userName},#{userSex},#{userAge},#{userRole})
+    </insert>
+    <delete id="delete" parameterType="string">
+        delete from user where user_id =#{userId}
+    </delete>
+    <select id="getRowCount" resultType="int">
+        select count(*)
+        from user
+        <where>
+            <if test="userName!=null and userName !=''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="userSex!=null and userSex !=''">
+                and user_sex = #{userSex}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>
