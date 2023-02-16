@@ -11,8 +11,18 @@
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
         <context:component-scan base-package="com.powernode"></context:component-scan>
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                <property name="prefix" value="/admin/"/>
+                <property name="prefix" value="/WEB-INF/jsp/"/>
                 <property name="suffix" value=".jsp"/>
         </bean>
         <mvc:annotation-driven></mvc:annotation-driven>
+        
+        <mvc:interceptors>
+                <!--可以是拦截器链-->
+                <mvc:interceptor>
+                        <mvc:mapping path="/**"/>
+                        <mvc:exclude-mapping path="/showLogin"/>
+                        <mvc:exclude-mapping path="/login"/>
+                        <bean class="com.powernode.intereptor.LoginIntereptor"/>
+                </mvc:interceptor>
+        </mvc:interceptors>
 </beans>

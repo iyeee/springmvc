@@ -16,5 +16,17 @@
 <a href="${pageContext.request.contextPath}/three.action">3.重定向页面</a><br><br>
 <a href="${pageContext.request.contextPath}/four.action">4.重定向action</a><br><br>
 <a href="${pageContext.request.contextPath}/five.action">5.随便跳页面</a><br><br>
+
+<br><br><br>
+
+<a href="${pageContext.request.contextPath}/data.action?name=zar">访问服务器，进行数据携带跳转</a>
+
+<form action="${pageContext.request.contextPath}/mydate.action">
+    日期：<input type="date" name="mydate"><br>
+        <input type="submit" value="提交">
+</form>
+
+<a href="${pageContext.request.contextPath}/list.action">显示集合中对象的日期成员</a>
+
 </body>
 </html>
